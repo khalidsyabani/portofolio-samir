@@ -163,9 +163,56 @@
             pointer-events: none;
             transition: transform 0.15s ease-out, opacity 0.3s ease;
         }
+
+        /* Fullscreen Welcome Overlay Transition */
+        #welcomeOverlay {
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out, visibility 0.8s;
+        }
+        #welcomeOverlay.hidden-welcome {
+            opacity: 0;
+            transform: scale(1.08);
+            visibility: hidden;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="live-space-bg text-slate-200 font-sans antialiased selection:bg-neonCyan selection:text-navy-950 transition-colors duration-500 min-h-screen flex flex-col justify-between overflow-x-hidden relative">
+
+    <!-- WELCOME TO MY WEBSITE SPLASH OVERLAY -->
+    <div id="welcomeOverlay" class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-navy-950/90 backdrop-blur-2xl">
+        <div class="relative max-w-xl w-full text-center space-y-8 animate-float">
+            <!-- Glowing Planet Icon Header -->
+            <div class="relative w-28 h-28 mx-auto">
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-neonCyan via-neonBlue to-purple-600 blur-2xl opacity-70 animate-pulse"></div>
+                <div class="relative w-full h-full rounded-full bg-navy-950/80 border border-neonCyan/40 p-1 flex items-center justify-center text-5xl shadow-2xl shadow-neonCyan/30">
+                    🪐
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <span class="px-4 py-1.5 rounded-full bg-neonCyan/10 text-neonCyan text-xs font-mono border border-neonCyan/30 uppercase tracking-widest shadow-glow-soft">
+                    ✨ Cosmic Personal Portfolio
+                </span>
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                    Welcome to My Website
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base font-light max-w-md mx-auto leading-relaxed">
+                    Selamat datang di ruang digital <strong class="text-neonCyan">Muhammad Samir Assobir (MUSA)</strong>. Nikmati pengalaman eksplorasi portofolio interaktif bernuansa angkasa.
+                </p>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="dismissWelcomeScreen()" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-neonCyan via-neonBlue to-electricBlue text-black font-extrabold text-xs tracking-wider uppercase shadow-glow-cyan hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 mx-auto group">
+                    <span>Eksplorasi Sekarang</span>
+                    <i class="fa-solid fa-rocket group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+
+            <div class="text-[11px] font-mono text-slate-500">
+                Temanggung, Jawa Tengah • 2026
+            </div>
+        </div>
+    </div>
 
     <!-- Live Space & Planet 3D Canvas Background -->
     <canvas id="spaceCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-80"></canvas>
@@ -277,15 +324,15 @@
                         </div>
 
                         <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                            Seorang pemuda yang mendedikasikan hidup untuk menuntut ilmu pengetahuan, memperdalam pemahaman agama, serta bersemangat mengembangkan potensi diri untuk kebaikan dunia dan akhirat[cite: 1].
+                            Seorang pemuda yang mendedikasikan hidup untuk menuntut ilmu pengetahuan, memperdalam pemahaman agama, serta bersemangat mengembangkan potensi diri untuk kebaikan dunia dan akhirat.
                         </p>
 
                         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
                             <div class="px-3.5 py-1.5 rounded-xl glass-card text-xs font-mono text-slate-300 border border-white/10 flex items-center gap-2">
-                                <i class="fa-solid fa-location-dot text-neonCyan"></i> Temanggung, Jawa Tengah[cite: 1]
+                                <i class="fa-solid fa-location-dot text-neonCyan"></i> Temanggung, Jawa Tengah
                             </div>
                             <div class="px-3.5 py-1.5 rounded-xl glass-card text-xs font-mono text-slate-300 border border-white/10 flex items-center gap-2">
-                                <i class="fa-solid fa-calendar-days text-neonCyan"></i> 1 November 2009[cite: 1]
+                                <i class="fa-solid fa-calendar-days text-neonCyan"></i> 1 November 2009
                             </div>
                         </div>
 
@@ -314,10 +361,10 @@
                                     <div class="absolute bottom-4 left-4 right-4 z-20 glass-card p-3 rounded-xl border border-white/10 flex items-center justify-between">
                                         <div class="flex items-center gap-2">
                                             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                            <span class="text-xs font-semibold text-slate-200">Penuntut Ilmu[cite: 1]</span>
+                                            <span class="text-xs font-semibold text-slate-200">Penuntut Ilmu</span>
                                         </div>
                                         <span class="text-[10px] uppercase font-bold tracking-wider text-neonCyan bg-neonCyan/10 px-2.5 py-1 rounded-md border border-neonCyan/20">
-                                            Temanggung[cite: 1]
+                                            Temanggung
                                         </span>
                                     </div>
                                 </div>
@@ -334,8 +381,8 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="text-center max-w-3xl mx-auto mb-16 space-y-3 reveal-left">
-                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Mengenal Lebih Dekat[cite: 1]</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Tentang Saya[cite: 1]</h2>
+                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Mengenal Lebih Dekat</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Tentang Saya</h2>
                     <p class="text-slate-400 text-sm sm:text-base">Latar belakang, identitas, dan makna nama Muhammad Samir Assobir.</p>
                 </div>
 
@@ -344,21 +391,21 @@
                     <div class="lg:col-span-7 glass-card p-8 sm:p-10 rounded-3xl space-y-6 reveal-left">
                         <div class="flex items-center gap-3 text-neonCyan">
                             <i class="fa-solid fa-user-gear text-2xl"></i>
-                            <h3 class="text-xl font-bold text-white">Latar Belakang & Identitas[cite: 1]</h3>
+                            <h3 class="text-xl font-bold text-white">Latar Belakang & Identitas</h3>
                         </div>
                         
                         <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
-                            Nama saya <strong class="text-white">Muhammad Samir Assobir</strong>. Lahir di kota yang asri dan sejuk, <strong class="text-neonCyan">Temanggung</strong>, pada tanggal <strong class="text-white">1 November 2009</strong>[cite: 1]. 
+                            Nama saya <strong class="text-white">Muhammad Samir Assobir</strong>. Lahir di kota yang asri dan sejuk, <strong class="text-neonCyan">Temanggung</strong>, pada tanggal <strong class="text-white">1 November 2009</strong>. 
                         </p>
                         
                         <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
-                            Sebagai generasi muda yang tumbuh di era pesatnya informasi dan teknologi, saya berprinsip untuk selalu menyeimbangkan antara pemahaman <strong class="text-neonCyan">ilmu agama Islam</strong> sebagai fondasi moral dan akhlak, serta <strong class="text-neonCyan">ilmu pengetahuan umum & teknologi</strong> sebagai sarana menebar kemanfaatan[cite: 1].
+                            Sebagai generasi muda yang tumbuh di era pesatnya informasi dan teknologi, saya berprinsip untuk selalu menyeimbangkan antara pemahaman <strong class="text-neonCyan">ilmu agama Islam</strong> sebagai fondasi moral dan akhlak, serta <strong class="text-neonCyan">ilmu pengetahuan umum & teknologi</strong> sebagai sarana menebar kemanfaatan.
                         </p>
 
                         <div class="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-                            <div class="text-xs font-semibold text-neonCyan uppercase tracking-wider">Makna Nama[cite: 1]</div>
+                            <div class="text-xs font-semibold text-neonCyan uppercase tracking-wider">Makna Nama</div>
                             <p class="text-xs sm:text-sm text-slate-300 italic">
-                                "Asshobir" berasal dari kata yang bermakna kesabaran. Menjadi pengingat bagi saya untuk selalu sabar dalam menuntut ilmu, sabar dalam ketaatan, dan konsisten mencapai cita-cita[cite: 1].
+                                "Asshobir" berasal dari kata yang bermakna kesabaran. Menjadi pengingat bagi saya untuk selalu sabar dalam menuntut ilmu, sabar dalam ketaatan, dan konsisten mencapai cita-cita.
                             </p>
                         </div>
                     </div>
@@ -368,24 +415,24 @@
                             <div class="w-12 h-12 rounded-xl bg-neonCyan/10 text-neonCyan mx-auto flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-city"></i>
                             </div>
-                            <div class="text-2xl font-bold text-white">Temanggung[cite: 1]</div>
-                            <div class="text-xs text-slate-400">Kota Kelahiran[cite: 1]</div>
+                            <div class="text-2xl font-bold text-white">Temanggung</div>
+                            <div class="text-xs text-slate-400">Kota Kelahiran</div>
                         </div>
 
                         <div class="glass-card p-6 rounded-2xl text-center space-y-2">
                             <div class="w-12 h-12 rounded-xl bg-neonCyan/10 text-neonCyan mx-auto flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-cake-candles"></i>
                             </div>
-                            <div class="text-2xl font-bold text-white">1 Nov 2009[cite: 1]</div>
-                            <div class="text-xs text-slate-400">Tanggal Lahir[cite: 1]</div>
+                            <div class="text-2xl font-bold text-white">1 Nov 2009</div>
+                            <div class="text-xs text-slate-400">Tanggal Lahir</div>
                         </div>
 
                         <div class="glass-card p-6 rounded-2xl text-center space-y-2 sm:col-span-2">
                             <div class="w-12 h-12 rounded-xl bg-neonCyan/10 text-neonCyan mx-auto flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-book-bookmark"></i>
                             </div>
-                            <div class="text-2xl font-bold text-white">Penuntut Ilmu[cite: 1]</div>
-                            <div class="text-xs text-slate-400">Fokus Utama Hidup[cite: 1]</div>
+                            <div class="text-2xl font-bold text-white">Penuntut Ilmu</div>
+                            <div class="text-xs text-slate-400">Fokus Utama Hidup</div>
                         </div>
                     </div>
 
@@ -397,9 +444,9 @@
         <section id="hobbies" class="py-24 relative bg-navy-900/40 border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <div class="text-center max-w-3xl mx-auto space-y-3 reveal-left">
-                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Passion & Dedikasi[cite: 1]</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Hobi & Minat Utama[cite: 1]</h2>
-                    <p class="text-slate-400 text-sm sm:text-base">Menuntut Ilmu adalah bahan bakar utama bagi perjalanan hidup saya[cite: 1].</p>
+                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Passion & Dedikasi</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Hobi & Minat Utama</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Menuntut Ilmu adalah bahan bakar utama bagi perjalanan hidup saya.</p>
                 </div>
 
                 <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden reveal-right">
@@ -412,18 +459,18 @@
 
                         <div class="lg:col-span-8 space-y-4">
                             <span class="px-3.5 py-1.5 rounded-full bg-neonCyan/10 text-neonCyan text-xs font-semibold border border-neonCyan/20">
-                                <i class="fa-solid fa-heart mr-1"></i> Hobi Terbesar[cite: 1]
+                                <i class="fa-solid fa-heart mr-1"></i> Hobi Terbesar
                             </span>
-                            <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Menuntut Ilmu[cite: 1]</h3>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Menuntut Ilmu</h3>
                             <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                                Hobi saya bukan sekadar hiburan meluangkan waktu, melainkan kegiatan <strong class="text-neonCyan">Menuntut Ilmu</strong> secara berkelanjutan. Saya senang membaca, mengkaji hal-hal baru, mempelajari konsep-konsep keilmuan, serta mengasah keterampilan hidup[cite: 1].
+                                Hobi saya bukan sekadar hiburan meluangkan waktu, melainkan kegiatan <strong class="text-neonCyan">Menuntut Ilmu</strong> secara berkelanjutan. Saya senang membaca, mengkaji hal-hal baru, mempelajari konsep-konsep keilmuan, serta mengasah keterampilan hidup.
                             </p>
 
                             <div class="p-5 rounded-2xl bg-navy-950/80 border-l-4 border-neonCyan space-y-2 mt-4">
                                 <p class="text-slate-200 text-xs sm:text-sm italic leading-relaxed">
-                                    "Barangsiapa menempuh jalan untuk menuntut ilmu, maka Allah akan mudahkan baginya jalan menuju surga."[cite: 1]
+                                    "Barangsiapa menempuh jalan untuk menuntut ilmu, maka Allah akan mudahkan baginya jalan menuju surga."
                                 </p>
-                                <div class="text-[11px] font-bold text-neonCyan">— HR. Muslim[cite: 1]</div>
+                                <div class="text-[11px] font-bold text-neonCyan">— HR. Muslim</div>
                             </div>
                         </div>
                     </div>
@@ -435,8 +482,8 @@
         <section id="dream" class="py-24 relative border-t border-white/5">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                 <div class="text-center space-y-3 reveal-left">
-                    <span class="text-xs font-mono uppercase tracking-widest text-accentGold font-bold">Visi Hidup Tertinggi[cite: 1]</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Cita-Cita Mulia[cite: 1]</h2>
+                    <span class="text-xs font-mono uppercase tracking-widest text-accentGold font-bold">Visi Hidup Tertinggi</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Cita-Cita Mulia</h2>
                 </div>
 
                 <div class="glass-card p-8 sm:p-12 rounded-3xl text-center space-y-8 border border-accentGold/30 reveal-right">
@@ -448,13 +495,13 @@
 
                     <div class="space-y-4 max-w-3xl mx-auto">
                         <span class="px-4 py-1.5 rounded-full bg-accentGold/10 text-accentGold text-xs font-bold border border-accentGold/30 uppercase tracking-widest">
-                            Impian Abadi[cite: 1]
+                            Impian Abadi
                         </span>
                         <h3 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                            Masuk Surga Tanpa Hisab[cite: 1]
+                            Masuk Surga Tanpa Hisab
                         </h3>
                         <p class="text-slate-300 text-sm sm:text-base leading-relaxed pt-2">
-                            Cita-cita tertinggi dan puncak dari seluruh muara perjuangan hidup saya adalah meraih ampunan dan ridho Allah SWT, sehingga dikumpulkan kelak bersama orang-orang sholeh di dalam <strong class="text-accentGold">Surga-Nya Tanpa Hisab</strong>[cite: 1].
+                            Cita-cita tertinggi dan puncak dari seluruh muara perjuangan hidup saya adalah meraih ampunan dan ridho Allah SWT, sehingga dikumpulkan kelak bersama orang-orang sholeh di dalam <strong class="text-accentGold">Surga-Nya Tanpa Hisab</strong>.
                         </p>
                     </div>
                 </div>
@@ -465,9 +512,9 @@
         <section id="gallery" class="py-24 relative bg-navy-900/40 border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-12 space-y-3 reveal-left">
-                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Dokumentasi & Kenangan[cite: 1]</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Galeri Saya[cite: 1]</h2>
-                    <p class="text-slate-400 text-sm sm:text-base">Kumpulan foto dan momen yang ingin saya abadikan[cite: 1].</p>
+                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Dokumentasi & Kenangan</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Galeri Saya</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Kumpulan foto dan momen yang ingin saya abadikan.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -488,9 +535,9 @@
         <section id="contact" class="py-24 relative border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-md mx-auto space-y-4 reveal-left">
-                    <h3 class="text-2xl sm:text-3xl font-bold text-white">Mari Terhubung[cite: 1]</h3>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-white">Mari Terhubung</h3>
                     <p class="text-slate-400 text-sm">
-                        Terima kasih telah membaca portofolio saya. Semoga silaturahmi ini membawakan keberkahan[cite: 1].
+                        Terima kasih telah membaca portofolio saya. Semoga silaturahmi ini membawakan keberkahan.
                     </p>
                     
                     <div class="flex justify-center items-center gap-4 pt-4">
@@ -525,7 +572,7 @@
                 </span>
                 <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Selamat Datang!</h3>
                 <p class="text-slate-300 text-sm leading-relaxed font-light">
-                    Terima kasih telah berkunjung ke ruang digital <strong class="text-neonCyan">Muhammad Samir Assobir (MUSA)</strong>[cite: 1]. Semoga Anda menikmati tampilan interaktif angkasa dan planet ini!
+                    Terima kasih telah berkunjung ke ruang digital <strong class="text-neonCyan">Muhammad Samir Assobir (MUSA)</strong>. Semoga Anda menikmati tampilan interaktif angkasa dan planet ini!
                 </p>
             </div>
 
@@ -546,12 +593,12 @@
     <footer class="bg-navy-950 border-t border-white/10 py-8 relative z-10 text-slate-400 text-xs font-mono">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-                &copy; 2026 <strong class="text-slate-300">Musa</strong>. All rights reserved[cite: 1].
+                &copy; 2026 <strong class="text-slate-300">Musa</strong>. All rights reserved.
             </div>
             <div class="flex items-center gap-3">
-                <span>Temanggung, 1 Nov 2009[cite: 1]</span>
+                <span>Temanggung, 1 Nov 2009</span>
                 <span class="w-1 h-1 rounded-full bg-neonCyan"></span>
-                <span class="text-neonCyan">Pencari Ridho-Nya[cite: 1]</span>
+                <span class="text-neonCyan">Pencari Ridho-Nya</span>
             </div>
         </div>
     </footer>
@@ -586,10 +633,19 @@
         let comets = [];
         function spawnComet() {
             comets.push({
-                x: Math.random() * canvas.width * 0.8, y: 0,
-                length: Math.random() * 80 + 50, speedX: 5, speedY: 5, alpha: 1
+                x: Math.random() * canvas.width * 0.7,
+                y: 0,
+                length: Math.random() * 100 + 60,
+                speedX: Math.random() * 4 + 4,
+                speedY: Math.random() * 4 + 4,
+                alpha: 1
             });
         }
+
+        // Spawn komet secara berkala di latar belakang
+        setInterval(() => {
+            if (Math.random() < 0.6) spawnComet();
+        }, 3000);
 
         function animateSpace() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -620,6 +676,32 @@
                 ctx.fill();
             });
 
+            // Animasi Komet yang melintas
+            comets.forEach((comet, index) => {
+                comet.x += comet.speedX;
+                comet.y += comet.speedY;
+                comet.alpha -= 0.008;
+
+                if (comet.alpha <= 0 || comet.x > canvas.width || comet.y > canvas.height) {
+                    comets.splice(index, 1);
+                    return;
+                }
+
+                const tailX = comet.x - comet.length;
+                const tailY = comet.y - (comet.length * (comet.speedY / comet.speedX));
+
+                const grad = ctx.createLinearGradient(comet.x, comet.y, tailX, tailY);
+                grad.addColorStop(0, `rgba(0, 242, 254, ${comet.alpha})`);
+                grad.addColorStop(1, `rgba(0, 242, 254, 0)`);
+
+                ctx.beginPath();
+                ctx.moveTo(comet.x, comet.y);
+                ctx.lineTo(tailX, tailY);
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+            });
+
             requestAnimationFrame(animateSpace);
         }
         animateSpace();
@@ -628,6 +710,12 @@
     <!-- General Interactive Scripts -->
     <script>
         feather.replace();
+
+        function dismissWelcomeScreen() {
+            const overlay = document.getElementById('welcomeOverlay');
+            overlay.classList.add('hidden-welcome');
+            spawnComet();
+        }
 
         function openWelcomeModal() {
             const modal = document.getElementById('welcomeModal');
