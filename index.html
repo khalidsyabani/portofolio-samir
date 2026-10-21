@@ -208,7 +208,7 @@
 </head>
 <body class="live-space-bg text-slate-200 font-sans antialiased selection:bg-neonCyan selection:text-navy-950 transition-colors duration-500 min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
-    <!-- ESTETIK POLL WELCOME TO MY WEBSITE OVERLAY -->
+    <!-- WELCOME TO MY WEBSITE OVERLAY -->
     <div id="welcomeOverlay" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-navy-950/90 backdrop-blur-2xl">
         <div class="welcome-card-border max-w-xl w-full shadow-2xl shadow-neonCyan/20">
             <div class="bg-navy-950/90 backdrop-blur-3xl rounded-[1.9rem] p-8 sm:p-12 text-center space-y-8 relative overflow-hidden">
@@ -268,10 +268,8 @@
     <!-- Tombol Planet "Selamat Datang" yang Muncul Dari Samping Kanan -->
     <div id="welcomePlanetContainer" class="fixed right-6 top-1/2 -translate-y-1/2 z-40 animate-planet-slide">
         <button onclick="openWelcomeModal()" class="group relative flex flex-col items-center focus:outline-none" title="Klik Planet untuk Ucapan Selamat Datang">
-            <!-- Ring Planet Glowing -->
             <div class="absolute inset-0 rounded-full bg-neonCyan/30 blur-xl group-hover:bg-neonCyan/60 transition-all duration-500 animate-pulse"></div>
             
-            <!-- Visual Planet Interaktif -->
             <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-neonCyan via-indigo-600 to-purple-800 p-0.5 shadow-2xl transition-transform duration-500 group-hover:scale-110 animate-float">
                 <div class="w-full h-full rounded-full bg-navy-950/80 backdrop-blur-sm flex flex-col items-center justify-center p-2 text-center border border-white/20">
                     <span class="text-2xl sm:text-3xl">🪐</span>
@@ -279,7 +277,6 @@
                 </div>
             </div>
 
-            <!-- Tooltip Label -->
             <span class="mt-2 px-3 py-1 rounded-full glass-card border border-neonCyan/40 text-[10px] font-mono text-neonCyan shadow-lg group-hover:scale-105 transition-transform">
                 ✨ Selamat Datang
             </span>
@@ -646,7 +643,7 @@
         </div>
     </footer>
 
-    <!-- Interactive Canvas 3D Space & Planets Script -->
+    <!-- Interactive Canvas 3D Space & 5 Planets Script -->
     <script>
         const canvas = document.getElementById('spaceCanvas');
         const ctx = canvas.getContext('2d');
@@ -658,7 +655,7 @@
         resizeCanvas();
 
         const stars = [];
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 120; i++) {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -668,9 +665,18 @@
             });
         }
 
+        // Daftar 5 Planet Interaktif di Angkasa
         const planets = [
-            { radius: 36, distance: 240, angle: 0, speed: 0.004, color1: "#00f2fe", color2: "#0072ff", hasRing: true, ringRadius: 55 },
-            { radius: 24, distance: 150, angle: Math.PI / 2, speed: 0.007, color1: "#fbbf24", color2: "#d97706", hasRing: false }
+            // Planet 1: Sian / Biru Neon dengan Cincin
+            { radius: 32, distance: 230, angle: 0, speed: 0.0035, color1: "#00f2fe", color2: "#0072ff", hasRing: true, ringColor: "rgba(0, 242, 254, 0.35)" },
+            // Planet 2: Oranye Emas
+            { radius: 22, distance: 140, angle: Math.PI / 2, speed: 0.006, color1: "#fbbf24", color2: "#d97706", hasRing: false },
+            // Planet 3 Baru: Merah / Oranye Terang (Mars-like)
+            { radius: 18, distance: 95, angle: Math.PI, speed: 0.008, color1: "#ff4b2b", color2: "#ff416c", hasRing: false },
+            // Planet 4 Baru: Magenta / Ungu Neon
+            { radius: 28, distance: 310, angle: Math.PI * 1.2, speed: 0.0025, color1: "#a855f7", color2: "#6366f1", hasRing: false },
+            // Planet 5 Baru: Hijau Toska / Emas dengan Cincin Luar
+            { radius: 25, distance: 380, angle: Math.PI * 0.4, speed: 0.0018, color1: "#10b981", color2: "#047857", hasRing: true, ringColor: "rgba(16, 185, 129, 0.4)" }
         ];
 
         let comets = [];
@@ -692,6 +698,8 @@
 
         function animateSpace() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Render Bintang
             stars.forEach(star => {
                 star.alpha += star.speed;
                 if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
@@ -701,25 +709,39 @@
                 ctx.fill();
             });
 
-            const centerX = canvas.width * 0.85;
-            const centerY = canvas.height * 0.35;
+            const centerX = canvas.width * 0.82;
+            const centerY = canvas.height * 0.38;
 
+            // Render 5 Planet
             planets.forEach(planet => {
                 planet.angle += planet.speed * speedMultiplier;
                 const x = centerX + Math.cos(planet.angle) * planet.distance;
-                const y = centerY + Math.sin(planet.angle) * (planet.distance * 0.4);
+                const y = centerY + Math.sin(planet.angle) * (planet.distance * 0.38);
 
-                const grad = ctx.createRadialGradient(x - 10, y - 10, 5, x, y, planet.radius);
+                // Draw Planet Ring (Jika Memiliki Cincin)
+                if (planet.hasRing) {
+                    ctx.beginPath();
+                    ctx.ellipse(x, y, planet.radius * 1.8, planet.radius * 0.5, Math.PI / 6, 0, Math.PI * 2);
+                    ctx.strokeStyle = planet.ringColor;
+                    ctx.lineWidth = 2.5;
+                    ctx.stroke();
+                }
+
+                // Draw Planet Sphere Gradient
+                const grad = ctx.createRadialGradient(x - planet.radius * 0.3, y - planet.radius * 0.3, planet.radius * 0.1, x, y, planet.radius);
                 grad.addColorStop(0, planet.color1);
                 grad.addColorStop(1, planet.color2);
 
                 ctx.beginPath();
                 ctx.arc(x, y, planet.radius, 0, Math.PI * 2);
                 ctx.fillStyle = grad;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = planet.color1;
                 ctx.fill();
+                ctx.shadowBlur = 0; // Reset Shadow
             });
 
-            // Animasi Komet yang melintas
+            // Animasi Komet yang Melintas
             comets.forEach((comet, index) => {
                 comet.x += comet.speedX;
                 comet.y += comet.speedY;
