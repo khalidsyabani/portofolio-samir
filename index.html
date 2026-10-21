@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,46 +7,65 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Fonts: Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        darkBase: '#030712',
-                        darkCard: 'rgba(15, 23, 42, 0.65)',
-                        darkBorder: 'rgba(255, 255, 255, 0.08)',
+                        navy: {
+                            950: '#030712',
+                            900: '#0B1329',
+                            800: '#111E38',
+                            700: '#1D2D50',
+                            600: '#2A3F68',
+                        },
+                        slate: {
+                            850: '#162032',
+                            800: '#1E293B',
+                            700: '#334155',
+                            400: '#94A3B8',
+                            300: '#CBD5E1',
+                            200: '#E2E8F0',
+                        },
+                        cyanGlow: {
+                            400: '#38BDF8',
+                            300: '#7DD3FC',
+                            200: '#BAE6FD',
+                            glow: 'rgba(56, 189, 248, 0.35)'
+                        },
                         neonCyan: '#00f2fe',
                         neonBlue: '#4facfe',
-                        neonPurple: '#a855f7',
-                        electricBlue: '#3b82f6',
+                        electricBlue: '#0072ff',
                         accentGold: '#fbbf24',
                     },
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                        'glow-cyan': '0 0 35px -5px rgba(56, 189, 248, 0.4)',
+                        'glow-soft': '0 0 50px -10px rgba(125, 211, 252, 0.25)',
                     },
                     animation: {
-                        'spin-slow': 'spin 20s linear infinite',
                         'float': 'float 6s ease-in-out infinite',
-                        'aurora': 'aurora 15s ease infinite alternate',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-glow': 'pulseGlow 5s ease-in-out infinite',
+                        'planet-slide': 'planetSlide 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-14px)' },
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(0.5deg)' },
                         },
-                        aurora: {
-                            '0%': { transform: 'translate(0%, 0%) rotate(0deg) scale(1)' },
-                            '50%': { transform: 'translate(10%, 15%) rotate(180deg) scale(1.2)' },
-                            '100%': { transform: 'translate(-5%, -10%) rotate(360deg) scale(0.9)' },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4' },
+                            '50%': { opacity: '0.75' },
+                        },
+                        planetSlide: {
+                            '0%': { transform: 'translateX(180px) scale(0.6)', opacity: '0' },
+                            '100%': { transform: 'translateX(0) scale(1)', opacity: '1' }
                         }
                     }
                 }
@@ -54,162 +73,61 @@
         }
     </script>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome & Feather Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
     <style>
-        /* Mesmerizing Live Dynamic Mesh Gradient Wallpaper */
-        body {
-            background-color: #030712;
-            overflow-x: hidden;
+        /* Live Moving Gradient Cosmic Background */
+        @keyframes cosmicGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Fullscreen Welcome Screen Overlay */
-        #welcome-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: radial-gradient(circle at 50% 50%, #080d1e 0%, #030712 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        #welcome-screen.hide-welcome {
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(1.08);
-            pointer-events: none;
-        }
-
-        .live-mesh-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-            background: radial-gradient(circle at 50% 50%, #080e21 0%, #030712 100%);
-        }
-
-        /* Glowing Aurora Orbs with Fluid Movement */
-        .aurora-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            opacity: 0.55;
-            mix-blend-mode: screen;
-            animation: aurora 22s ease-in-out infinite alternate;
-        }
-
-        .orb-1 {
-            top: -10%;
-            left: -10%;
-            width: 55vw;
-            height: 55vw;
-            background: radial-gradient(circle, rgba(0, 242, 254, 0.45) 0%, rgba(59, 130, 246, 0.1) 70%);
-            animation-duration: 18s;
-        }
-
-        .orb-2 {
-            top: 40%;
-            right: -15%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(99, 102, 241, 0.1) 70%);
-            animation-duration: 25s;
-            animation-delay: -5s;
-        }
-
-        .orb-3 {
-            bottom: -15%;
-            left: 20%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, rgba(236, 72, 153, 0.1) 70%);
-            animation-duration: 20s;
-            animation-delay: -10s;
-        }
-
-        /* Modern Glassmorphism Premium Cards */
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        .live-space-bg {
+            background: linear-gradient(-45deg, #02040a, #0b1329, #111e38, #070d1e, #02040a);
+            background-size: 400% 400%;
+            animation: cosmicGradient 20s ease infinite;
         }
 
         .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(13, 19, 34, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .glass-card:hover {
-            border-color: rgba(0, 242, 254, 0.4);
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 40px -15px rgba(0, 242, 254, 0.25);
+        .glass-nav {
+            background: rgba(11, 19, 41, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Animated Neon Border Badge & Box */
-        .animated-border-box {
-            position: relative;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            padding: 2px;
+        /* Scroll Reveal Slide Animations */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .animated-border-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0deg,
-                #00f2fe 90deg,
-                #a855f7 180deg,
-                #fbbf24 270deg,
-                #00f2fe 360deg
-            );
-            animation: rotateBorder 8s linear infinite;
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes rotateBorder {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .reveal-left.active, .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
         }
 
-        .animated-border-content {
-            position: relative;
-            background: #080d1e;
-            border-radius: 1.4rem;
-            z-index: 1;
-        }
-
-        /* Glowing Text & Shadows */
-        .glow-text-cyan {
-            text-shadow: 0 0 30px rgba(0, 242, 254, 0.6);
-        }
-
-        .glow-text-purple {
-            text-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
-        }
-
-        .glow-text-gold {
-            text-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
-        }
-
-        .box-glow-cyan {
-            box-shadow: 0 0 60px -10px rgba(0, 242, 254, 0.25);
-        }
-
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -217,80 +135,81 @@
             background: #030712;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
+            background: #111E38;
+            border-radius: 9999px;
+            border: 2px solid #030712;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #00f2fe;
         }
 
-        /* Scroll Reveal Animation Utility */
-        .reveal {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        .bg-grid-mesh {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: #00f2fe;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        #cursorGlow {
+            pointer-events: none;
+            transition: transform 0.15s ease-out, opacity 0.3s ease;
         }
     </style>
 </head>
-<body class="text-slate-100 font-sans antialiased selection:bg-neonCyan selection:text-black">
+<body class="live-space-bg text-slate-200 font-sans antialiased selection:bg-neonCyan selection:text-navy-950 transition-colors duration-500 min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
-    <!-- 1. WELCOME SCREEN / SPLASH PAGE -->
-    <div id="welcome-screen">
-        <div class="max-w-xl mx-auto px-6 text-center space-y-8 animate-float">
+    <!-- Live Space & Planet 3D Canvas Background -->
+    <canvas id="spaceCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-80"></canvas>
+
+    <div id="cursorGlow" class="fixed top-0 left-0 w-96 h-96 -translate-x-1/2 -translate-y-1/2 bg-cyan-500/15 rounded-full blur-[120px] z-0 pointer-events-none"></div>
+
+    <!-- Tombol Planet "Selamat Datang" yang Muncul Dari Samping Kanan -->
+    <div id="welcomePlanetContainer" class="fixed right-6 top-1/2 -translate-y-1/2 z-40 animate-planet-slide">
+        <button onclick="openWelcomeModal()" class="group relative flex flex-col items-center focus:outline-none" title="Klik Planet untuk Ucapan Selamat Datang">
+            <!-- Ring Planet Glowing -->
+            <div class="absolute inset-0 rounded-full bg-neonCyan/30 blur-xl group-hover:bg-neonCyan/60 transition-all duration-500 animate-pulse"></div>
             
-            <div class="relative w-24 h-24 mx-auto">
-                <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-neonCyan via-neonPurple to-accentGold blur-xl opacity-70 animate-pulse"></div>
-                <div class="relative w-full h-full rounded-3xl glass-panel border border-white/20 flex items-center justify-center text-black font-extrabold text-4xl shadow-2xl">
-                    م س
+            <!-- Visual Planet Interaktif -->
+            <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-neonCyan via-indigo-600 to-purple-800 p-0.5 shadow-2xl transition-transform duration-500 group-hover:scale-110 animate-float">
+                <div class="w-full h-full rounded-full bg-navy-950/80 backdrop-blur-sm flex flex-col items-center justify-center p-2 text-center border border-white/20">
+                    <span class="text-2xl sm:text-3xl">🪐</span>
+                    <span class="text-[9px] font-mono font-bold text-neonCyan tracking-tighter uppercase mt-0.5">Klik Saya</span>
                 </div>
             </div>
 
-            <div class="space-y-3">
-                <span class="px-4 py-1.5 rounded-full bg-neonCyan/10 text-neonCyan text-xs font-semibold border border-neonCyan/30 uppercase tracking-widest">
-                    ✦ Personal Digital Portfolio ✦
-                </span>
-                <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                    Welcome to My Website
-                </h1>
-                <p class="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
-                    Selamat datang di ruang portofolio digital resmi <strong class="text-neonCyan">Muhammad Samir Assobir (MUSA)</strong>[cite: 5].
-                </p>
-            </div>
-
-            <div class="pt-2">
-                <button onclick="enterWebsite()" class="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-neonCyan via-electricBlue to-neonPurple text-black font-extrabold text-sm shadow-xl shadow-neonCyan/25 hover:scale-105 transition-all duration-300 cursor-pointer">
-                    <span>MASUK KE PORTFOLIO</span>
-                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                </button>
-            </div>
-
-            <div class="text-xs text-slate-500">
-                Temanggung, Jawa Tengah • 2026[cite: 5]
-            </div>
-
-        </div>
+            <!-- Tooltip Label -->
+            <span class="mt-2 px-3 py-1 rounded-full glass-card border border-neonCyan/40 text-[10px] font-mono text-neonCyan shadow-lg group-hover:scale-105 transition-transform">
+                ✨ Selamat Datang
+            </span>
+        </button>
     </div>
 
-    <!-- LIVE WALLPAPER CONTAINER -->
-    <div class="live-mesh-bg">
-        <!-- Aurora Glowing Orbs -->
-        <div class="aurora-orb orb-1"></div>
-        <div class="aurora-orb orb-2"></div>
-        <div class="aurora-orb orb-3"></div>
-        <!-- Interactive Canvas Particles -->
-        <canvas id="particleCanvas" class="w-full h-full pointer-events-auto"></canvas>
+    <!-- Space Control Panel Floating Button -->
+    <div class="fixed bottom-6 left-6 z-40 hidden md:flex items-center gap-2 p-2 rounded-2xl glass-card border border-white/10 shadow-2xl text-xs font-mono">
+        <span class="text-slate-400 px-2">🪐 Orbit Speed:</span>
+        <button onclick="setPlanetSpeed(0.5)" class="px-2.5 py-1 rounded-lg bg-navy-900 hover:bg-neonCyan hover:text-navy-950 text-slate-300 transition-colors">0.5x</button>
+        <button onclick="setPlanetSpeed(1)" class="px-2.5 py-1 rounded-lg bg-neonCyan text-navy-950 font-bold">1x</button>
+        <button onclick="setPlanetSpeed(2)" class="px-2.5 py-1 rounded-lg bg-navy-900 hover:bg-neonCyan hover:text-navy-950 text-slate-300 transition-colors">2x</button>
+        <button onclick="spawnComet()" class="px-3 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-sans font-semibold transition-colors flex items-center gap-1">
+            <span>☄️ Komet</span>
+        </button>
     </div>
 
-    <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/5 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#home" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-neonCyan via-neonPurple to-accentGold flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-neonCyan/20 group-hover:scale-105 transition-transform">
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <a href="#hero" class="flex items-center space-x-3 group" onclick="openWelcomeModal()">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-neonCyan to-electricBlue flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-neonCyan/20 group-hover:scale-105 transition-transform" aria-label="Logo Mim dan Sin">
                     م س
                 </div>
                 <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-neonCyan bg-clip-text text-transparent">
@@ -298,552 +217,430 @@
                 </span>
             </a>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                <a href="#home" class="hover:text-neonCyan transition-colors">Beranda</a>
-                <a href="#about" class="hover:text-neonCyan transition-colors">Tentang</a>
-                <a href="#hobbies" class="hover:text-neonCyan transition-colors">Hobi & Ilmu</a>
-                <a href="#dream" class="hover:text-neonCyan transition-colors">Cita-Cita</a>
-                <a href="#galeri" class="hover:text-neonCyan transition-colors">Galeri</a>
-                <a href="#contact" class="hover:text-neonCyan transition-colors">Kontak</a>
+            <nav class="hidden md:flex items-center space-x-1 glass-card px-4 py-2 rounded-full border border-white/10">
+                <a href="#hero" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all">Beranda</a>
+                <a href="#about" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all">Tentang</a>
+                <a href="#hobbies" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all">Hobi & Ilmu</a>
+                <a href="#dream" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all">Cita-Cita</a>
+                <a href="#gallery" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all">Galeri</a>
+                <a href="#contact" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all">Kontak</a>
             </nav>
 
-            <!-- CTA Header Button -->
-            <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold text-black bg-gradient-to-r from-neonCyan via-neonBlue to-neonPurple shadow-lg shadow-neonCyan/20 hover:opacity-90 transition-all hover:scale-105">
-                <i class="fa-solid fa-paper-plane"></i> Hubungi
-            </a>
+            <div class="flex items-center space-x-3">
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold text-black bg-gradient-to-r from-neonCyan to-neonBlue shadow-lg shadow-neonCyan/20 hover:opacity-90 transition-all hover:scale-105">
+                    <i class="fa-solid fa-paper-plane"></i> Hubungi
+                </a>
 
-            <!-- Mobile Menu Toggle Button -->
-            <button id="menu-btn" aria-label="Buka Menu" class="md:hidden text-slate-300 hover:text-white p-2 text-xl focus:outline-none">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
+                <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl glass-card text-slate-300 hover:text-white focus:outline-none">
+                    <i data-feather="menu" id="menuIcon" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/5 px-6 py-6 flex flex-col gap-4 text-slate-300 text-sm">
-            <a href="#home" class="mobile-link hover:text-neonCyan transition-colors">Beranda</a>
-            <a href="#about" class="mobile-link hover:text-neonCyan transition-colors">Tentang</a>
-            <a href="#hobbies" class="mobile-link hover:text-neonCyan transition-colors">Hobi & Ilmu</a>
-            <a href="#dream" class="mobile-link hover:text-neonCyan transition-colors">Cita-Cita</a>
-            <a href="#galeri" class="mobile-link hover:text-neonCyan transition-colors">Galeri</a>
-            <a href="#contact" class="mobile-link hover:text-neonCyan transition-colors">Kontak</a>
+        <div id="mobileMenu" class="hidden md:hidden glass-card border-b border-white/10 px-6 py-6 space-y-4">
+            <a href="#hero" class="block text-sm font-medium text-slate-200 hover:text-neonCyan mobile-link">Beranda</a>
+            <a href="#about" class="block text-sm font-medium text-slate-200 hover:text-neonCyan mobile-link">Tentang Saya</a>
+            <a href="#hobbies" class="block text-sm font-medium text-slate-200 hover:text-neonCyan mobile-link">Hobi & Ilmu</a>
+            <a href="#dream" class="block text-sm font-medium text-slate-200 hover:text-neonCyan mobile-link">Cita-Cita</a>
+            <a href="#gallery" class="block text-sm font-medium text-slate-200 hover:text-neonCyan mobile-link">Galeri Saya</a>
+            <a href="#contact" class="block text-sm font-medium text-slate-200 hover:text-neonCyan mobile-link">Kontak</a>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="relative z-10">
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 relative z-10">
 
-        <!-- HERO SECTION -->
-        <section id="home" class="min-h-screen pt-32 pb-20 px-6 flex items-center justify-center">
-            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-                
-                <!-- Hero Photo Column -->
-                <div class="lg:col-span-5 flex justify-center order-1 lg:order-1 reveal">
-                    <div class="animated-border-box w-full max-w-sm sm:max-w-md box-glow-cyan animate-float">
-                        <div class="animated-border-content p-4 sm:p-5">
-                            <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-slate-900 group">
-                                <div class="absolute inset-0 bg-gradient-to-t from-darkBase via-transparent to-transparent z-10 opacity-70 group-hover:opacity-40 transition-opacity"></div>
-                                
-                                <img src="foto1.jpg" onError="this.onerror=null; this.src='https://placehold.co/800x1000/0f172a/00f2fe?text=Musa';" alt="Muhammad Samir Assobir" class="w-full h-full object-cover object-top rounded-2xl group-hover:scale-105 transition-transform duration-700">
-                                
-                                <!-- Floating Status Badge -->
-                                <div class="absolute bottom-4 left-4 right-4 z-20 glass-panel p-3 rounded-xl border border-white/10 flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                        <span class="text-xs font-semibold text-slate-200">Penuntut Ilmu</span>
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-[88vh] flex items-center justify-center relative bg-grid-mesh py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Text Column Left -->
+                    <div class="lg:col-span-7 text-center lg:text-left space-y-6 reveal-left">
+                        
+                        <button onclick="openWelcomeModal()" class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-card border border-neonCyan/30 text-neonCyan text-xs font-semibold tracking-wide shadow-glow-soft animate-float hover:scale-105 transition-transform cursor-pointer">
+                            <span class="w-2 h-2 rounded-full bg-neonCyan animate-ping"></span>
+                            <span>✦ Assalamu'alaikum & Selamat Datang (Klik Di Sini)</span>
+                        </button>
+
+                        <div class="space-y-2">
+                            <h1 class="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
+                                Saya <br/>
+                                <span class="bg-gradient-to-r from-neonCyan via-neonBlue to-electricBlue bg-clip-text text-transparent">
+                                    Muhammad Samir Assobir
+                                </span>
+                            </h1>
+                            <div class="text-lg sm:text-2xl font-mono text-slate-300 font-medium h-8 pt-1">
+                                <span>Saya seorang </span>
+                                <span id="typingText" class="typing-cursor text-neonCyan font-semibold"></span>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                            Seorang pemuda yang mendedikasikan hidup untuk menuntut ilmu pengetahuan, memperdalam pemahaman agama, serta bersemangat mengembangkan potensi diri untuk kebaikan dunia dan akhirat[cite: 1].
+                        </p>
+
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+                            <div class="px-3.5 py-1.5 rounded-xl glass-card text-xs font-mono text-slate-300 border border-white/10 flex items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-neonCyan"></i> Temanggung, Jawa Tengah[cite: 1]
+                            </div>
+                            <div class="px-3.5 py-1.5 rounded-xl glass-card text-xs font-mono text-slate-300 border border-white/10 flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-days text-neonCyan"></i> 1 November 2009[cite: 1]
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#about" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-neonCyan to-electricBlue text-black font-bold text-sm shadow-lg shadow-neonCyan/25 hover:opacity-95 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2">
+                                <span>Jelajahi Profil</span>
+                                <i class="fa-solid fa-arrow-down-long"></i>
+                            </a>
+                            <a href="#dream" class="w-full sm:w-auto px-8 py-4 rounded-2xl glass-card text-slate-200 hover:text-white border border-white/10 hover:border-neonCyan/50 font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2">
+                                <span>Cita-Cita Mulia</span>
+                                <i class="fa-solid fa-star text-accentGold"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- Photo Column Right -->
+                    <div class="lg:col-span-5 flex justify-center reveal-right">
+                        <div class="relative w-full max-w-md animate-float-delayed">
+                            <div class="absolute -inset-1 bg-gradient-to-tr from-neonCyan to-electricBlue rounded-3xl blur-2xl opacity-50"></div>
+
+                            <div class="relative rounded-3xl glass-card p-4 sm:p-5 shadow-2xl border border-white/15">
+                                <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-slate-900 group">
+                                    <img src="foto1.jpg" onError="this.onerror=null; this.src='foto1.png';" alt="Muhammad Samir Assobir" class="w-full h-full object-cover object-top rounded-2xl group-hover:scale-105 transition-transform duration-700">
+                                    
+                                    <div class="absolute bottom-4 left-4 right-4 z-20 glass-card p-3 rounded-xl border border-white/10 flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                            <span class="text-xs font-semibold text-slate-200">Penuntut Ilmu[cite: 1]</span>
+                                        </div>
+                                        <span class="text-[10px] uppercase font-bold tracking-wider text-neonCyan bg-neonCyan/10 px-2.5 py-1 rounded-md border border-neonCyan/20">
+                                            Temanggung[cite: 1]
+                                        </span>
                                     </div>
-                                    <span class="text-[10px] uppercase font-bold tracking-wider text-neonCyan bg-neonCyan/10 px-2.5 py-1 rounded-md border border-neonCyan/20">
-                                        Temanggung
-                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
-
-                <!-- Hero Text Column -->
-                <div class="lg:col-span-7 space-y-6 order-2 lg:order-2 reveal">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-neonCyan/30 text-xs text-neonCyan font-medium">
-                        <i class="fa-solid fa-sparkles text-neonCyan"></i> Assalamu'alaikum & Selamat Datang
-                    </div>
-
-                    <div class="space-y-2">
-                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                            Saya <br class="hidden sm:inline">
-                            <span class="bg-gradient-to-r from-neonCyan via-neonPurple to-accentGold bg-clip-text text-transparent glow-text-cyan">
-                                Muhammad Samir Assobir
-                            </span>
-                        </h1>
-                        <div class="text-lg sm:text-2xl font-medium text-slate-400 flex items-center gap-2 pt-2">
-                            <span>Saya seorang</span>
-                            <span id="typingText" class="text-neonCyan font-semibold underline decoration-neonCyan/40 decoration-wavy"></span>
-                            <span class="w-1 h-6 bg-neonCyan animate-pulse"></span>
-                        </div>
-                    </div>
-
-                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-                        Seorang pemuda yang mendedikasikan hidup untuk menuntut ilmu pengetahuan, memperdalam pemahaman agama, serta bersemangat mengembangkan potensi diri untuk kebaikan dunia dan akhirat[cite: 5].
-                    </p>
-
-                    <div class="flex flex-wrap gap-3 pt-2">
-                        <div class="glass-card px-4 py-2.5 rounded-xl text-xs sm:text-sm text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-location-dot text-neonCyan"></i> Temanggung, Jawa Tengah[cite: 5]
-                        </div>
-                        <div class="glass-card px-4 py-2.5 rounded-xl text-xs sm:text-sm text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-calendar-days text-neonPurple"></i> 1 November 2009[cite: 5]
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
-                        <a href="#about" class="px-8 py-4 rounded-xl bg-gradient-to-r from-neonCyan via-electricBlue to-neonPurple text-black font-bold text-sm text-center shadow-lg shadow-neonCyan/25 hover:opacity-95 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-                            Jelajahi Profil <i class="fa-solid fa-arrow-down-long"></i>
-                        </a>
-                        <a href="#dream" class="px-8 py-4 rounded-xl glass-panel text-slate-200 font-semibold text-sm text-center hover:border-neonCyan transition-all flex items-center justify-center gap-2">
-                            Cita-Cita Mulia <i class="fa-solid fa-star text-accentGold"></i>
-                        </a>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- TENTANG SAYA (ABOUT SECTION) -->
-        <section id="about" class="py-24 px-6 relative border-t border-white/5">
-            <div class="max-w-6xl mx-auto space-y-16">
+        <!-- About Section -->
+        <section id="about" class="py-24 relative border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div class="text-center space-y-3 reveal">
-                    <span class="text-xs uppercase tracking-widest text-neonCyan font-bold">Mengenal Lebih Dekat</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Tentang Saya</h2>
-                    <div class="w-16 h-1 bg-gradient-to-r from-neonCyan via-neonPurple to-accentGold mx-auto rounded-full"></div>
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-3 reveal-left">
+                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Mengenal Lebih Dekat[cite: 1]</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Tentang Saya[cite: 1]</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Latar belakang, identitas, dan makna nama Muhammad Samir Assobir.</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
-                    <div class="lg:col-span-7 glass-card p-8 sm:p-10 rounded-3xl space-y-6 reveal">
+                    <div class="lg:col-span-7 glass-card p-8 sm:p-10 rounded-3xl space-y-6 reveal-left">
                         <div class="flex items-center gap-3 text-neonCyan">
                             <i class="fa-solid fa-user-gear text-2xl"></i>
-                            <h3 class="text-xl font-bold text-white">Latar Belakang & Identitas</h3>
+                            <h3 class="text-xl font-bold text-white">Latar Belakang & Identitas[cite: 1]</h3>
                         </div>
                         
                         <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
-                            Nama saya <strong class="text-white">Muhammad Samir Assobir</strong>. Lahir di kota yang asri dan sejuk, <strong class="text-neonCyan">Temanggung</strong>, pada tanggal <strong class="text-white">1 November 2009</strong>[cite: 5]. 
+                            Nama saya <strong class="text-white">Muhammad Samir Assobir</strong>. Lahir di kota yang asri dan sejuk, <strong class="text-neonCyan">Temanggung</strong>, pada tanggal <strong class="text-white">1 November 2009</strong>[cite: 1]. 
                         </p>
                         
                         <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
-                            Sebagai generasi muda yang tumbuh di era pesatnya informasi dan teknologi, saya berprinsip untuk selalu menyeimbangkan antara pemahaman <strong class="text-neonCyan">ilmu agama Islam</strong> sebagai fondasi moral dan akhlak, serta <strong class="text-neonPurple">ilmu pengetahuan umum & teknologi</strong> sebagai sarana menebar kemanfaatan[cite: 5].
+                            Sebagai generasi muda yang tumbuh di era pesatnya informasi dan teknologi, saya berprinsip untuk selalu menyeimbangkan antara pemahaman <strong class="text-neonCyan">ilmu agama Islam</strong> sebagai fondasi moral dan akhlak, serta <strong class="text-neonCyan">ilmu pengetahuan umum & teknologi</strong> sebagai sarana menebar kemanfaatan[cite: 1].
                         </p>
 
                         <div class="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-                            <div class="text-xs font-semibold text-neonCyan uppercase tracking-wider">Makna Nama</div>
+                            <div class="text-xs font-semibold text-neonCyan uppercase tracking-wider">Makna Nama[cite: 1]</div>
                             <p class="text-xs sm:text-sm text-slate-300 italic">
-                                "Asshobir" berasal dari kata yang bermakna kesabaran. Menjadi pengingat bagi saya untuk selalu sabar dalam menuntut ilmu, sabar dalam ketaatan, dan konsisten mencapai cita-cita[cite: 5].
+                                "Asshobir" berasal dari kata yang bermakna kesabaran. Menjadi pengingat bagi saya untuk selalu sabar dalam menuntut ilmu, sabar dalam ketaatan, dan konsisten mencapai cita-cita[cite: 1].
                             </p>
                         </div>
                     </div>
 
-                    <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4 reveal">
+                    <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-right">
                         <div class="glass-card p-6 rounded-2xl text-center space-y-2">
                             <div class="w-12 h-12 rounded-xl bg-neonCyan/10 text-neonCyan mx-auto flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-city"></i>
                             </div>
-                            <div class="text-2xl font-bold text-white">Temanggung</div>
-                            <div class="text-xs text-slate-400">Kota Kelahiran</div>
+                            <div class="text-2xl font-bold text-white">Temanggung[cite: 1]</div>
+                            <div class="text-xs text-slate-400">Kota Kelahiran[cite: 1]</div>
                         </div>
 
                         <div class="glass-card p-6 rounded-2xl text-center space-y-2">
-                            <div class="w-12 h-12 rounded-xl bg-neonPurple/10 text-neonPurple mx-auto flex items-center justify-center text-xl">
+                            <div class="w-12 h-12 rounded-xl bg-neonCyan/10 text-neonCyan mx-auto flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-cake-candles"></i>
                             </div>
-                            <div class="text-2xl font-bold text-white">1 Nov 2009</div>
-                            <div class="text-xs text-slate-400">Tanggal Lahir</div>
+                            <div class="text-2xl font-bold text-white">1 Nov 2009[cite: 1]</div>
+                            <div class="text-xs text-slate-400">Tanggal Lahir[cite: 1]</div>
                         </div>
 
                         <div class="glass-card p-6 rounded-2xl text-center space-y-2 sm:col-span-2">
-                            <div class="w-12 h-12 rounded-xl bg-accentGold/10 text-accentGold mx-auto flex items-center justify-center text-xl">
+                            <div class="w-12 h-12 rounded-xl bg-neonCyan/10 text-neonCyan mx-auto flex items-center justify-center text-xl">
                                 <i class="fa-solid fa-book-bookmark"></i>
                             </div>
-                            <div class="text-2xl font-bold text-white">Penuntut Ilmu</div>
-                            <div class="text-xs text-slate-400">Fokus Utama Hidup</div>
+                            <div class="text-2xl font-bold text-white">Penuntut Ilmu[cite: 1]</div>
+                            <div class="text-xs text-slate-400">Fokus Utama Hidup[cite: 1]</div>
                         </div>
                     </div>
 
                 </div>
-
             </div>
         </section>
 
-        <!-- HOBI & MINAT (HOBBY SECTION) -->
-        <section id="hobbies" class="py-24 px-6 relative border-t border-white/5">
-            <div class="max-w-6xl mx-auto space-y-16">
-                
-                <div class="text-center space-y-3 reveal">
-                    <span class="text-xs uppercase tracking-widest text-neonPurple font-bold">Passion & Dedikasi</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Hobi & Minat Utama</h2>
-                    <p class="text-slate-400 max-w-xl mx-auto text-sm">Menuntut Ilmu adalah bahan bakar utama bagi perjalanan hidup saya[cite: 5].</p>
-                    <div class="w-16 h-1 bg-gradient-to-r from-neonCyan via-neonPurple to-accentGold mx-auto rounded-full"></div>
+        <!-- Hobi & Minat Section -->
+        <section id="hobbies" class="py-24 relative bg-navy-900/40 border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center max-w-3xl mx-auto space-y-3 reveal-left">
+                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Passion & Dedikasi[cite: 1]</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Hobi & Minat Utama[cite: 1]</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Menuntut Ilmu adalah bahan bakar utama bagi perjalanan hidup saya[cite: 1].</p>
                 </div>
 
-                <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden reveal">
+                <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden reveal-right">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                         <div class="lg:col-span-4 flex justify-center">
-                            <div class="w-44 h-44 rounded-3xl bg-gradient-to-tr from-neonCyan/20 via-neonPurple/20 to-accentGold/20 border border-neonCyan/30 flex items-center justify-center text-7xl text-neonCyan shadow-2xl shadow-neonCyan/20">
+                            <div class="w-44 h-44 rounded-3xl bg-gradient-to-tr from-neonCyan/20 to-electricBlue/20 border border-neonCyan/30 flex items-center justify-center text-7xl text-neonCyan shadow-2xl shadow-neonCyan/20">
                                 <i class="fa-solid fa-book-open-reader"></i>
                             </div>
                         </div>
 
                         <div class="lg:col-span-8 space-y-4">
                             <span class="px-3.5 py-1.5 rounded-full bg-neonCyan/10 text-neonCyan text-xs font-semibold border border-neonCyan/20">
-                                <i class="fa-solid fa-heart mr-1"></i> Hobi Terbesar
+                                <i class="fa-solid fa-heart mr-1"></i> Hobi Terbesar[cite: 1]
                             </span>
-                            <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Menuntut Ilmu</h3>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Menuntut Ilmu[cite: 1]</h3>
                             <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                                Hobi saya bukan sekadar hiburan meluangkan waktu, melainkan kegiatan <strong class="text-neonCyan">Menuntut Ilmu</strong> secara berkelanjutan. Saya senang membaca, mengkaji hal-hal baru, mempelajari konsep-konsep keilmuan, serta mengasah keterampilan hidup[cite: 5].
+                                Hobi saya bukan sekadar hiburan meluangkan waktu, melainkan kegiatan <strong class="text-neonCyan">Menuntut Ilmu</strong> secara berkelanjutan. Saya senang membaca, mengkaji hal-hal baru, mempelajari konsep-konsep keilmuan, serta mengasah keterampilan hidup[cite: 1].
                             </p>
 
-                            <div class="p-5 rounded-2xl bg-darkBase/80 border-l-4 border-neonCyan space-y-2 mt-4">
+                            <div class="p-5 rounded-2xl bg-navy-950/80 border-l-4 border-neonCyan space-y-2 mt-4">
                                 <p class="text-slate-200 text-xs sm:text-sm italic leading-relaxed">
-                                    "Barangsiapa menempuh jalan untuk menuntut ilmu, maka Allah akan mudahkan baginya jalan menuju surga."[cite: 5]
+                                    "Barangsiapa menempuh jalan untuk menuntut ilmu, maka Allah akan mudahkan baginya jalan menuju surga."[cite: 1]
                                 </p>
-                                <div class="text-[11px] font-bold text-neonCyan">— HR. Muslim[cite: 5]</div>
+                                <div class="text-[11px] font-bold text-neonCyan">— HR. Muslim[cite: 1]</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
-                    <div class="glass-card p-6 rounded-2xl space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-neonCyan/10 text-neonCyan flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-mosque"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white">Ilmu Agama & Syariat</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">
-                            Memperdalam Al-Qur'an, Hadits, serta pemahaman nilai-nilai keislaman sebagai pedoman utama hidup[cite: 5].
-                        </p>
-                    </div>
-
-                    <div class="glass-card p-6 rounded-2xl space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-neonPurple/10 text-neonPurple flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white">Teknologi & Digital</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">
-                            Antusias mengikuti perkembangan teknologi modern, pemrograman dasar, dan dunia digital[cite: 5].
-                        </p>
-                    </div>
-
-                    <div class="glass-card p-6 rounded-2xl space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-accentGold/10 text-accentGold flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-brain"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white">Pengembangan Diri</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">
-                            Meningkatkan pemikiran kritis, kemampuan literasi, serta disiplin pribadi secara berkesinambungan[cite: 5].
-                        </p>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- CITA-CITA MULIA (DREAM SECTION) -->
-        <section id="dream" class="py-24 px-6 relative border-t border-white/5 overflow-hidden">
-            <div class="max-w-5xl mx-auto space-y-16">
-                
-                <div class="text-center space-y-3 reveal">
-                    <span class="text-xs uppercase tracking-widest text-accentGold font-bold">Visi Hidup Tertinggi</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Cita-Cita Mulia</h2>
-                    <div class="w-16 h-1 bg-gradient-to-r from-accentGold via-neonCyan to-neonPurple mx-auto rounded-full"></div>
+        <!-- Cita-Cita Mulia Section -->
+        <section id="dream" class="py-24 relative border-t border-white/5">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center space-y-3 reveal-left">
+                    <span class="text-xs font-mono uppercase tracking-widest text-accentGold font-bold">Visi Hidup Tertinggi[cite: 1]</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Cita-Cita Mulia[cite: 1]</h2>
                 </div>
 
-                <div class="animated-border-box box-glow-cyan reveal">
-                    <div class="animated-border-content p-8 sm:p-14 text-center space-y-8 relative overflow-hidden">
-                        
-                        <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-accentGold via-neonCyan to-neonPurple p-0.5 mx-auto shadow-2xl shadow-accentGold/20 animate-float">
-                            <div class="w-full h-full bg-darkBase rounded-[22px] flex items-center justify-center text-accentGold text-4xl">
-                                <i class="fa-solid fa-kaaba"></i>
-                            </div>
+                <div class="glass-card p-8 sm:p-12 rounded-3xl text-center space-y-8 border border-accentGold/30 reveal-right">
+                    <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-accentGold to-neonCyan p-0.5 mx-auto shadow-2xl animate-float">
+                        <div class="w-full h-full bg-navy-950 rounded-[22px] flex items-center justify-center text-accentGold text-4xl">
+                            <i class="fa-solid fa-kaaba"></i>
                         </div>
+                    </div>
 
-                        <div class="space-y-4 max-w-3xl mx-auto">
-                            <span class="px-4 py-1.5 rounded-full bg-accentGold/10 text-accentGold text-xs font-bold border border-accentGold/30 uppercase tracking-widest">
-                                Impian Abadi
-                            </span>
-                            <h3 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                                Masuk Surga Tanpa Hisab
-                            </h3>
-                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed pt-2">
-                                Cita-cita tertinggi dan puncak dari seluruh muara perjuangan hidup saya adalah meraih ampunan dan ridho Allah SWT, sehingga dikumpulkan kelak bersama orang-orang sholeh di dalam <strong class="text-accentGold glow-text-gold">Surga-Nya Tanpa Hisab</strong>[cite: 5].
-                            </p>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 text-left">
-                            <div class="glass-panel p-4 rounded-xl border border-white/10 space-y-1">
-                                <div class="text-accentGold text-base font-bold"><i class="fa-solid fa-check-double mr-1.5"></i> Mengamalkan Ilmu</div>
-                                <div class="text-xs text-slate-400">Ilmu yang dipelajari dipraktikkan dalam ibadah & kehidupan[cite: 5].</div>
-                            </div>
-                            <div class="glass-panel p-4 rounded-xl border border-white/10 space-y-1">
-                                <div class="text-accentGold text-base font-bold"><i class="fa-solid fa-heart-pulse mr-1.5"></i> Akhlak Mulia</div>
-                                <div class="text-xs text-slate-400">Berbakti kepada orang tua dan bersikap santun sesama[cite: 5].</div>
-                            </div>
-                            <div class="glass-panel p-4 rounded-xl border border-white/10 space-y-1">
-                                <div class="text-accentGold text-base font-bold"><i class="fa-solid fa-infinity mr-1.5"></i> Istiqomah</div>
-                                <div class="text-xs text-slate-400">Konsisten menjaga kebaikan dan menjauhi larangan-Nya[cite: 5].</div>
-                            </div>
-                            <div class="glass-panel p-4 rounded-xl border border-white/10 space-y-1">
-                                <div class="text-accentGold text-base font-bold"><i class="fa-solid fa-hands-praying mr-1.5"></i> Doa & Tawakkal</div>
-                                <div class="text-xs text-slate-400">Selalu memohon petunjuk dan kelurusan niat kepada Allah[cite: 5].</div>
-                            </div>
-                        </div>
-
-                        <div class="pt-4 text-xs text-slate-400 italic">
-                            "Ya Allah, bimbinglah setiap langkah kami agar selalu berada di jalan yang Engkau ridhoi."[cite: 5]
-                        </div>
-
+                    <div class="space-y-4 max-w-3xl mx-auto">
+                        <span class="px-4 py-1.5 rounded-full bg-accentGold/10 text-accentGold text-xs font-bold border border-accentGold/30 uppercase tracking-widest">
+                            Impian Abadi[cite: 1]
+                        </span>
+                        <h3 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                            Masuk Surga Tanpa Hisab[cite: 1]
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed pt-2">
+                            Cita-cita tertinggi dan puncak dari seluruh muara perjuangan hidup saya adalah meraih ampunan dan ridho Allah SWT, sehingga dikumpulkan kelak bersama orang-orang sholeh di dalam <strong class="text-accentGold">Surga-Nya Tanpa Hisab</strong>[cite: 1].
+                        </p>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- GALERI SAYA -->
-        <section id="galeri" class="py-24 px-6 relative border-t border-white/5">
-            <div class="max-w-6xl mx-auto space-y-12">
-                <div class="text-center space-y-3 reveal">
-                    <span class="text-xs uppercase tracking-widest text-neonCyan font-bold">Dokumentasi & Kenangan</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Galeri Saya</h2>
-                    <p class="text-slate-400 max-w-xl mx-auto text-sm">Kumpulan foto dan momen yang ingin saya abadikan[cite: 5].</p>
-                    <div class="w-16 h-1 bg-gradient-to-r from-neonCyan via-neonPurple to-accentGold mx-auto rounded-full"></div>
+        <!-- Galeri & Musik -->
+        <section id="gallery" class="py-24 relative bg-navy-900/40 border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-3 reveal-left">
+                    <span class="text-xs font-mono font-semibold tracking-widest text-neonCyan uppercase">Dokumentasi & Kenangan[cite: 1]</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Galeri Saya[cite: 1]</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Kumpulan foto dan momen yang ingin saya abadikan[cite: 1].</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="glass-card p-3 rounded-2xl reveal group">
-                        <div class="aspect-[4/5] overflow-hidden rounded-xl bg-slate-900">
-                            <img src="foto2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x1000/0f172a/a855f7?text=Momen+01';" alt="Foto galeri 1" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <p class="text-sm font-semibold text-slate-200 pt-3 px-1">Momen 01</p>
-                    </div>
-                    <div class="glass-card p-3 rounded-2xl reveal group">
-                        <div class="aspect-[4/5] overflow-hidden rounded-xl bg-slate-900">
-                            <img src="foto3.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x1000/0f172a/fbbf24?text=Momen+02';" alt="Foto galeri 2" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <p class="text-sm font-semibold text-slate-200 pt-3 px-1">Momen 02</p>
-                    </div>
-                    <div class="glass-card p-3 rounded-2xl reveal group">
-                        <div class="aspect-[4/5] overflow-hidden rounded-xl bg-slate-900">
-                            <img src="foto1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x1000/0f172a/00f2fe?text=Foto+Profil';" alt="Foto profil saya" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <p class="text-sm font-semibold text-slate-200 pt-3 px-1">Foto Profil</p>
-                    </div>
+                    <button type="button" class="gallery-item group relative text-left rounded-3xl overflow-hidden glass-card border border-white/10 focus:outline-none reveal-left" onclick="openPhoto('foto2.jpg')">
+                        <img src="foto2.jpg" onerror="this.onerror=null;this.src='foto2.png';" alt="Momen 01" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </button>
+                    <button type="button" class="gallery-item group relative text-left rounded-3xl overflow-hidden glass-card border border-white/10 focus:outline-none reveal-left" onclick="openPhoto('foto3.jpg')">
+                        <img src="foto3.jpg" onerror="this.onerror=null;this.src='foto3.png';" alt="Momen 02" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </button>
+                    <button type="button" class="gallery-item group relative text-left rounded-3xl overflow-hidden glass-card border border-white/10 focus:outline-none reveal-right" onclick="openPhoto('foto1.jpg')">
+                        <img src="foto1.jpg" onerror="this.onerror=null;this.src='foto1.png';" alt="Foto Profil" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- KONTAK & FOOTER SECTION -->
-        <footer id="contact" class="pt-20 pb-12 px-6 border-t border-white/5 bg-slate-950/80 relative">
-            <div class="max-w-6xl mx-auto space-y-12">
-                
-                <div class="text-center space-y-4 reveal">
-                    <h3 class="text-2xl sm:text-3xl font-bold text-white">Mari Terhubung</h3>
-                    <p class="text-slate-400 max-w-md mx-auto text-sm">
-                        Terima kasih telah membaca portofolio saya. Semoga silaturahmi ini membawakan keberkahan[cite: 5].
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 relative border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-md mx-auto space-y-4 reveal-left">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-white">Mari Terhubung[cite: 1]</h3>
+                    <p class="text-slate-400 text-sm">
+                        Terima kasih telah membaca portofolio saya. Semoga silaturahmi ini membawakan keberkahan[cite: 1].
                     </p>
                     
                     <div class="flex justify-center items-center gap-4 pt-4">
                         <a href="mailto:contact@musa.dev" aria-label="Kirim Email" class="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-300 hover:text-neonCyan hover:border-neonCyan transition-all text-xl">
                             <i class="fa-solid fa-envelope"></i>
                         </a>
-                        <a href="#" aria-label="Instagram Profile" class="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-300 hover:text-neonPurple hover:border-neonPurple transition-all text-xl">
+                        <a href="#" aria-label="Instagram Profile" class="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-300 hover:text-neonCyan hover:border-neonCyan transition-all text-xl">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="#" aria-label="WhatsApp Contact" class="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-300 hover:text-accentGold hover:border-accentGold transition-all text-xl">
+                        <a href="#" aria-label="WhatsApp Contact" class="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-300 hover:text-neonCyan hover:border-neonCyan transition-all text-xl">
                             <i class="fa-brands fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
-
-                <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-                    <div>
-                        &copy; 2026 <strong class="text-slate-300">Musa</strong>. All rights reserved[cite: 5].
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span>Temanggung, 1 Nov 2009[cite: 5]</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-neonCyan"></span>
-                        <span class="text-neonCyan">Pencari Ridho-Nya[cite: 5]</span>
-                    </div>
-                </div>
-
             </div>
-        </footer>
+        </section>
 
     </main>
 
-    <!-- JavaScript Logic -->
+    <!-- Modal Popup "Selamat Datang" saat Planet Diklik -->
+    <div id="welcomeModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-xl transition-all duration-500">
+        <div class="relative w-full max-w-md rounded-3xl glass-card border border-neonCyan/40 p-8 space-y-6 text-center shadow-2xl animate-float">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-neonCyan to-electricBlue mx-auto p-1 shadow-glow-cyan">
+                <div class="w-full h-full rounded-full bg-navy-950 flex items-center justify-center text-4xl">
+                    🪐
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <span class="px-3 py-1 rounded-full bg-neonCyan/10 text-neonCyan text-xs font-mono border border-neonCyan/30">
+                    ✨ Welcome Status: Active
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Selamat Datang!</h3>
+                <p class="text-slate-300 text-sm leading-relaxed font-light">
+                    Terima kasih telah berkunjung ke ruang digital <strong class="text-neonCyan">Muhammad Samir Assobir (MUSA)</strong>[cite: 1]. Semoga Anda menikmati tampilan interaktif angkasa dan planet ini!
+                </p>
+            </div>
+
+            <div class="pt-2 flex flex-col gap-3">
+                <button onclick="closeWelcomeModal()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-neonCyan to-electricBlue text-black font-extrabold text-xs shadow-glow-cyan hover:scale-[1.02] transition-transform">
+                    Eksplorasi Sekarang 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Lightbox -->
+    <div id="photoModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-md" onclick="closePhoto()">
+        <img id="photoModalImage" src="" alt="Foto" class="max-w-full max-h-[85vh] object-contain rounded-xl">
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 border-t border-white/10 py-8 relative z-10 text-slate-400 text-xs font-mono">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                &copy; 2026 <strong class="text-slate-300">Musa</strong>. All rights reserved[cite: 1].
+            </div>
+            <div class="flex items-center gap-3">
+                <span>Temanggung, 1 Nov 2009[cite: 1]</span>
+                <span class="w-1 h-1 rounded-full bg-neonCyan"></span>
+                <span class="text-neonCyan">Pencari Ridho-Nya[cite: 1]</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Canvas 3D Space & Planets Script -->
     <script>
-        // Enter Website Function
-        function enterWebsite() {
-            const welcomeScreen = document.getElementById('welcome-screen');
-            welcomeScreen.classList.add('hide-welcome');
-        }
-
-        // 1. Interactive Dynamic Canvas Particles Wallpaper
-        const canvas = document.getElementById('particleCanvas');
+        const canvas = document.getElementById('spaceCanvas');
         const ctx = canvas.getContext('2d');
+        let speedMultiplier = 1;
 
-        let particles = [];
-        let mouse = { x: null, y: null, radius: 150 };
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
+        function setPlanetSpeed(speed) { speedMultiplier = speed; }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        window.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.radius = Math.random() * 2.5 + 0.8;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.baseAlpha = Math.random() * 0.5 + 0.2;
-                this.color = ['#00f2fe', '#a855f7', '#fbbf24', '#3b82f6'][Math.floor(Math.random() * 4)];
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-                // Mouse interactivity
-                if (mouse.x && mouse.y) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < mouse.radius) {
-                        let force = (mouse.radius - distance) / mouse.radius;
-                        this.x -= (dx / distance) * force * 3;
-                        this.y -= (dy / distance) * force * 3;
-                    }
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.globalAlpha = this.baseAlpha;
-                ctx.shadowBlur = 12;
-                ctx.shadowColor = this.color;
-                ctx.fill();
-            }
+        const stars = [];
+        for (let i = 0; i < 100; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5 + 0.5,
+                alpha: Math.random(),
+                speed: Math.random() * 0.02 + 0.005
+            });
         }
 
-        function initParticles() {
-            particles = [];
-            const particleCount = Math.min(Math.floor(window.innerWidth / 18), 70);
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        initParticles();
+        const planets = [
+            { radius: 36, distance: 240, angle: 0, speed: 0.004, color1: "#00f2fe", color2: "#0072ff", hasRing: true, ringRadius: 55 },
+            { radius: 24, distance: 150, angle: Math.PI / 2, speed: 0.007, color1: "#fbbf24", color2: "#d97706", hasRing: false }
+        ];
 
-        function animateParticles() {
+        let comets = [];
+        function spawnComet() {
+            comets.push({
+                x: Math.random() * canvas.width * 0.8, y: 0,
+                length: Math.random() * 80 + 50, speedX: 5, speedY: 5, alpha: 1
+            });
+        }
+
+        function animateSpace() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw connecting lines between close particles
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    let dx = particles[a].x - particles[b].x;
-                    let dy = particles[a].y - particles[b].y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.strokeStyle = '#00f2fe';
-                        ctx.globalAlpha = (1 - dist / 120) * 0.15;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                ctx.fill();
             });
-            requestAnimationFrame(animateParticles);
+
+            const centerX = canvas.width * 0.85;
+            const centerY = canvas.height * 0.35;
+
+            planets.forEach(planet => {
+                planet.angle += planet.speed * speedMultiplier;
+                const x = centerX + Math.cos(planet.angle) * planet.distance;
+                const y = centerY + Math.sin(planet.angle) * (planet.distance * 0.4);
+
+                const grad = ctx.createRadialGradient(x - 10, y - 10, 5, x, y, planet.radius);
+                grad.addColorStop(0, planet.color1);
+                grad.addColorStop(1, planet.color2);
+
+                ctx.beginPath();
+                ctx.arc(x, y, planet.radius, 0, Math.PI * 2);
+                ctx.fillStyle = grad;
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animateSpace);
         }
-        animateParticles();
+        animateSpace();
+    </script>
 
-        // 2. Typing Effect for Subtitle
-        const words = ["Penuntut Ilmu", "Pencari Ridho-Nya", "Tech & Islamic Student"];
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingElement = document.getElementById('typingText');
+    <!-- General Interactive Scripts -->
+    <script>
+        feather.replace();
 
-        function typeEffect() {
-            const currentWord = words[wordIndex];
-            
-            if (isDeleting) {
-                typingElement.textContent = currentWord.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentWord.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(typeEffect, typeSpeed);
+        function openWelcomeModal() {
+            const modal = document.getElementById('welcomeModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            spawnComet();
         }
 
-        document.addEventListener('DOMContentLoaded', typeEffect);
-
-        // 3. Mobile Navigation Menu Toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // 4. Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        function closeWelcomeModal() {
+            const modal = document.getElementById('welcomeModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -851,9 +648,51 @@
                     entry.target.classList.add('active');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+        const phrases = ["Penuntut Ilmu", "Pencari Ridho-Nya", "Tech & Islamic Student"];
+        let phraseIdx = 0, charIdx = 0, isDeleting = false;
+        const typingElem = document.getElementById('typingText');
+
+        function typeLoop() {
+            const currentPhrase = phrases[phraseIdx];
+            if (isDeleting) {
+                typingElem.textContent = currentPhrase.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                typingElem.textContent = currentPhrase.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                setTimeout(() => isDeleting = true, 1800);
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+            }
+
+            setTimeout(typeLoop, isDeleting ? 50 : 100);
+        }
+        document.addEventListener('DOMContentLoaded', typeLoop);
+
+        function openPhoto(src) {
+            const modal = document.getElementById('photoModal');
+            document.getElementById('photoModalImage').src = src;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePhoto() {
+            const modal = document.getElementById('photoModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     </script>
 </body>
 </html>
