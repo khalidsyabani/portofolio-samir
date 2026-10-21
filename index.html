@@ -53,6 +53,7 @@
                         'float-delayed': 'float 6s ease-in-out 3s infinite',
                         'pulse-glow': 'pulseGlow 5s ease-in-out infinite',
                         'planet-slide': 'planetSlide 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'spin-slow': 'spin 12s linear infinite',
                     },
                     keyframes: {
                         float: {
@@ -164,6 +165,35 @@
             transition: transform 0.15s ease-out, opacity 0.3s ease;
         }
 
+        /* Animated Glowing Border Box untuk Welcome Screen */
+        .welcome-card-border {
+            position: relative;
+            border-radius: 2rem;
+            overflow: hidden;
+            padding: 2px;
+        }
+        .welcome-card-border::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                #00f2fe 90deg,
+                #a855f7 180deg,
+                #fbbf24 270deg,
+                #00f2fe 360deg
+            );
+            animation: rotateBorder 8s linear infinite;
+        }
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Fullscreen Welcome Overlay Transition */
         #welcomeOverlay {
             transition: opacity 0.8s ease-out, transform 0.8s ease-out, visibility 0.8s;
@@ -178,38 +208,54 @@
 </head>
 <body class="live-space-bg text-slate-200 font-sans antialiased selection:bg-neonCyan selection:text-navy-950 transition-colors duration-500 min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
-    <!-- WELCOME TO MY WEBSITE SPLASH OVERLAY -->
-    <div id="welcomeOverlay" class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-navy-950/90 backdrop-blur-2xl">
-        <div class="relative max-w-xl w-full text-center space-y-8 animate-float">
-            <!-- Glowing Planet Icon Header -->
-            <div class="relative w-28 h-28 mx-auto">
-                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-neonCyan via-neonBlue to-purple-600 blur-2xl opacity-70 animate-pulse"></div>
-                <div class="relative w-full h-full rounded-full bg-navy-950/80 border border-neonCyan/40 p-1 flex items-center justify-center text-5xl shadow-2xl shadow-neonCyan/30">
-                    🪐
+    <!-- ESTETIK POLL WELCOME TO MY WEBSITE OVERLAY -->
+    <div id="welcomeOverlay" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-navy-950/90 backdrop-blur-2xl">
+        <div class="welcome-card-border max-w-xl w-full shadow-2xl shadow-neonCyan/20">
+            <div class="bg-navy-950/90 backdrop-blur-3xl rounded-[1.9rem] p-8 sm:p-12 text-center space-y-8 relative overflow-hidden">
+                
+                <!-- Background Ambient Glow -->
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-neonCyan/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Cosmic Sphere & Orbit Rings -->
+                <div class="relative w-28 h-28 mx-auto animate-float">
+                    <div class="absolute inset-0 rounded-full border border-neonCyan/40 animate-spin-slow"></div>
+                    <div class="absolute inset-2 rounded-full border border-dashed border-purple-500/50"></div>
+                    <div class="absolute inset-4 rounded-full bg-gradient-to-tr from-neonCyan via-indigo-600 to-purple-600 blur-xl opacity-75 animate-pulse"></div>
+                    <div class="relative w-full h-full rounded-full bg-navy-950/80 border border-white/20 flex items-center justify-center text-5xl shadow-2xl">
+                        ☄️
+                    </div>
                 </div>
-            </div>
 
-            <div class="space-y-3">
-                <span class="px-4 py-1.5 rounded-full bg-neonCyan/10 text-neonCyan text-xs font-mono border border-neonCyan/30 uppercase tracking-widest shadow-glow-soft">
-                    ✨ Cosmic Personal Portfolio
-                </span>
-                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                    Welcome to My Website
-                </h1>
-                <p class="text-slate-300 text-sm sm:text-base font-light max-w-md mx-auto leading-relaxed">
-                    Selamat datang di ruang digital <strong class="text-neonCyan">Muhammad Samir Assobir (MUSA)</strong>. Nikmati pengalaman eksplorasi portofolio interaktif bernuansa angkasa.
-                </p>
-            </div>
+                <div class="space-y-4">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neonCyan/10 text-neonCyan text-xs font-mono border border-neonCyan/30 shadow-glow-soft">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>OFFICIAL DIGITAL PORTFOLIO</span>
+                    </div>
 
-            <div class="pt-2">
-                <button onclick="dismissWelcomeScreen()" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-neonCyan via-neonBlue to-electricBlue text-black font-extrabold text-xs tracking-wider uppercase shadow-glow-cyan hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 mx-auto group">
-                    <span>Eksplorasi Sekarang</span>
-                    <i class="fa-solid fa-rocket group-hover:translate-x-1 transition-transform"></i>
-                </button>
-            </div>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                        Welcome to <br/>
+                        <span class="bg-gradient-to-r from-neonCyan via-neonBlue to-electricBlue bg-clip-text text-transparent">
+                            My Website
+                        </span>
+                    </h1>
 
-            <div class="text-[11px] font-mono text-slate-500">
-                Temanggung, Jawa Tengah • 2026
+                    <p class="text-slate-300 text-sm sm:text-base font-light max-w-md mx-auto leading-relaxed">
+                        Selamat datang di ruang eksplorasi digital <strong class="text-white">Muhammad Samir Assobir (MUSA)</strong>. Nikmati portofolio bernuansa angkasa dan teknologi.
+                    </p>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="dismissWelcomeScreen()" class="w-full sm:w-auto px-10 py-4 rounded-2xl bg-gradient-to-r from-neonCyan via-neonBlue to-electricBlue text-black font-extrabold text-xs tracking-wider uppercase shadow-glow-cyan hover:scale-105 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-3 group cursor-pointer">
+                        <span>MASUK KE PORTFOLIO</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
+                <div class="text-[11px] font-mono text-slate-500 pt-2 border-t border-white/5">
+                    Temanggung, Jawa Tengah • 2026
+                </div>
+
             </div>
         </div>
     </div>
@@ -256,10 +302,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
             <a href="#hero" class="flex items-center space-x-3 group" onclick="openWelcomeModal()">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-neonCyan to-electricBlue flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-neonCyan/20 group-hover:scale-105 transition-transform" aria-label="Logo Mim dan Sin">
-                    م س
-                </div>
-                <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-neonCyan bg-clip-text text-transparent">
+                <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-neonCyan bg-clip-text text-transparent">
                     MUSA
                 </span>
             </a>
